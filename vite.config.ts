@@ -11,5 +11,15 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
+  },
+  server: {
+    port: 8899,
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'http://syt.atguigu.cn',
+        changeOrigin: true
+      }
+    }
   }
 })

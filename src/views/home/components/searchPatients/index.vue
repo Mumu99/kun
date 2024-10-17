@@ -4,9 +4,10 @@
       v-model="state"
       :fetch-suggestions="querySearchAsync"
       placeholder="请输入医院名称"
-      @select="handleSelect"
+      @select="goDetail"
       size="large"
       class="search-input"
+      value-key="hosname"
     >
     </el-autocomplete>
     <el-button type="primary" :icon="Search" size="large" class="search-btn">
@@ -16,56 +17,31 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
-
+import { queryByHosname } from '@/services/patients'
+import type { HospitalByHosnameData, Content } from '@/services/type'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+// 当前输入的医院名次
 const state = ref('')
-
-interface LinkItem {
-  value: string
-  link: string
-}
-
-const links = ref<LinkItem[]>([])
-
-const loadAll = () => {
-  return [
-    { value: 'vue', link: 'https://github.com/vuejs/vue' },
-    { value: 'element', link: 'https://github.com/ElemeFE/element' },
-    { value: 'cooking', link: 'https://github.com/ElemeFE/cooking' },
-    { value: 'mint-ui', link: 'https://github.com/ElemeFE/mint-ui' },
-    { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
-    { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
-    { value: 'babel', link: 'https://github.com/babel/babel' }
-  ]
-}
-
-let timeout: NodeJS.Timeout
-const querySearchAsync = (queryString: string, cb: (arg: any) => void) => {
-  const results = queryString
-    ? links.value.filter(createFilter(queryString))
-    : links.value
-
-  clearTimeout(timeout)
-  timeout = setTimeout(() => {
-    cb(results)
-  }, 1000 * Math.random())
-}
-const createFilter = (queryString: string) => {
-  return (restaurant: LinkItem) => {
-    return (
-      restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-    )
+// 根据用户输入的数据查询发送接口
+const querySearchAsync = async (
+  hosname: string,
+  cb: (arg: Content) => void
+) => {
+  if (hosname) {
+    const data: HospitalByHosnameData = await queryByHosname(hosname)
+    cb(data.data || [])
+  } else {
+    cb([])
   }
 }
-
-const handleSelect = (item: LinkItem) => {
-  console.log(item)
+// 展示详情页
+const goDetail = (item: any) => {
+  const { hoscode } = item
+  router.push({ name: 'Patients', params: { hoscode } })
 }
-
-onMounted(() => {
-  links.value = loadAll()
-})
 </script>
 
 <style lang="less" scoped>

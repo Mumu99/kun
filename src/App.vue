@@ -37,8 +37,7 @@ body {
   width: 100%;
   .main {
     width: 100%;
-    margin-top: 72px;
-    height: 1000px;
+    margin: 72px 0 20px;
     .main-wrap {
       padding: 0 26px;
     }

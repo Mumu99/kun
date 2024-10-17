@@ -9,6 +9,9 @@ import { useElementPlusTheme } from 'use-element-plus-theme'
 const color = '#3c62b0' // 主题颜色
 localStorage.setItem('themeColor', color) // 持久化
 useElementPlusTheme(color) // 切换主题色
+
+// 国际化
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 // 引入 App 组件
 import App from '@/App.vue'
 // 清除默认样式
@@ -22,6 +25,9 @@ import router from '@/router'
 
 // 利用 createApp() 创建一个 Vue 应用实例，并挂载到 id 为 app 的元素上
 createApp(App)
+  .use(ElementPlus, {
+    locale: zhCn
+  })
   .use(ElementPlus)
   .use(router)
   .component('Header', Header)

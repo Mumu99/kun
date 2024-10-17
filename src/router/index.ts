@@ -15,9 +15,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/patient',
-    name: 'Patient',
-    component: Patient
+    path: '/patients/:hoscode',
+    name: 'Patients',
+    component: Patient,
+    props: true // 允许将路由参数作为组件的 props
   },
   {
     path: '/:pathMatch(.*)*',

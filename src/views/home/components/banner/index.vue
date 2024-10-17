@@ -1,5 +1,5 @@
 <template>
-  <div class="banner-container" v-if="bannerList.length > 1">
+  <div class="banner-container" v-if="bannerList.length > 3">
     <Swiper
       :modules="modules"
       :pagination="{ clickable: true }"
@@ -77,6 +77,8 @@ const modules = [Navigation, Pagination, Autoplay]
         opacity: 0.75;
         justify-content: center;
         align-items: center;
+        font-family: TencentSans-W7;
+        font-size: 26px;
       }
     }
     .swiper-pagination {

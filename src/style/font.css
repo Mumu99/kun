@@ -4,3 +4,9 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'TencentSans-W3';
+  src: url('../assets/font/TencentSans-W3.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
