@@ -8,6 +8,7 @@
       size="large"
       class="search-input"
       value-key="hosname"
+      :teleported="false"
     >
     </el-autocomplete>
     <el-button type="primary" :icon="Search" size="large" class="search-btn">
@@ -40,7 +41,7 @@ const querySearchAsync = async (
 // 展示详情页
 const goDetail = (item: any) => {
   const { hoscode } = item
-  router.push({ name: 'Patients', params: { hoscode } })
+  router.push({ path: '/patients/appointmentRegistration', query: { hoscode } })
 }
 </script>
 

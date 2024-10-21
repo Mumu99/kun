@@ -6,7 +6,11 @@ const apis = {
     // 级别
     levelAndRegion: '/cmn/dict/findByDictCode/',
     // 根据医院名称获取医院列表
-    queryByHosname: '/hosp/hospital/findByHosname/'
+    queryByHosname: '/hosp/hospital/findByHosname/',
+    // 根据code获取医院详情
+    hospitalDetail: '/hosp/hospital/',
+    // 根据code获取科室列表
+    hospitalDepartment: '/hosp/hospital/department/'
   }
 }
 

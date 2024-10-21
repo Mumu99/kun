@@ -79,7 +79,7 @@ const router = useRouter()
 defineProps(['patientsData'])
 
 const goDetail = (hoscode: string) => {
-  router.push({ name: 'Patients', params: { hoscode } })
+  router.push({ path: '/patients/appointmentRegistration', query: { hoscode } })
 }
 </script>
 

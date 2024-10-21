@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import Banner from './components/banner/index.vue'
-import SearchPatients from './components/searchPatients/index.vue'
+import SearchPatients from '@/components/searchPatients/index.vue'
 import CityPatients from './components/cityPatients/index.vue'
 </script>
 

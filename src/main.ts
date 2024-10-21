@@ -1,6 +1,7 @@
 // v3框架提供的方法 createApp() 创建一个 Vue 应用实例
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
+import { createPinia } from 'pinia'
 import 'element-plus/dist/index.css'
 // 暗黑模式
 import 'element-plus/theme-chalk/dark/css-vars.css'
@@ -25,6 +26,7 @@ import router from '@/router'
 
 // 利用 createApp() 创建一个 Vue 应用实例，并挂载到 id 为 app 的元素上
 createApp(App)
+  .use(createPinia())
   .use(ElementPlus, {
     locale: zhCn
   })

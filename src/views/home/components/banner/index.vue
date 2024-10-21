@@ -1,5 +1,5 @@
 <template>
-  <div class="banner-container" v-if="bannerList.length > 3">
+  <div class="banner-container">
     <Swiper
       :modules="modules"
       :pagination="{ clickable: true }"
@@ -9,18 +9,15 @@
       navigation
       class="banner-swiper"
     >
+      <SwiperSlide class="bg-blueGray">
+        <img class="banner-img" :src="bannerData.src" alt="" />
+      </SwiperSlide>
       <SwiperSlide
-        v-for="item in bannerList"
+        v-for="item in store.bullentinList"
         :key="item.src"
         class="bg-blueGray"
       >
-        <img
-          v-if="item.type === 'image'"
-          class="banner-img"
-          :src="item.src"
-          alt=""
-        />
-        <h3 v-else class="banner-text" text="2xl" justify="center">
+        <h3 class="banner-text" text="2xl" justify="center">
           {{ item.src }}
         </h3>
       </SwiperSlide>
@@ -29,10 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import banner1 from '@/assets/images/banner1.png'
+import { useBullentinStore } from '@/store/bullentin'
 // 导入Swiper样式
 import 'swiper/css'
 import 'swiper/less/navigation'
@@ -40,20 +37,14 @@ import 'swiper/less/pagination'
 import 'swiper/less/autoplay'
 import { reactive } from 'vue'
 interface Banner {
+  id: string
   type: string
   src: string
 }
-const bannerList: Banner[] = reactive([{ type: 'image', src: banner1 }])
-// https://api.uomg.com/api/rand.qinghua?format=json 随机一句话
-// https://dog.ceo/api/breed/pembroke/images/random 随机宠物图片
-const getBannerList = async () => {
-  const { data } = await axios.get(
-    'https://api.uomg.com/api/rand.qinghua?format=json'
-  )
-  bannerList.push({ type: 'text', src: data.content })
-}
+const store = useBullentinStore()
+const bannerData: Banner = reactive({ id: '111', type: 'image', src: banner1 })
 for (let i = 0; i < 3; i++) {
-  getBannerList()
+  store.getTalk()
 }
 const modules = [Navigation, Pagination, Autoplay]
 </script>
@@ -79,6 +70,8 @@ const modules = [Navigation, Pagination, Autoplay]
         align-items: center;
         font-family: TencentSans-W7;
         font-size: 26px;
+        padding: 0 100px;
+        line-height: 36px;
       }
     }
     .swiper-pagination {

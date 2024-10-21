@@ -32,6 +32,9 @@
   font-size: 14px;
   background-color: var(--bg-color);
   border-color: var(--border-color);
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
   .footer-left {
     padding-left: 26px;
     color: var(--p-default-color);

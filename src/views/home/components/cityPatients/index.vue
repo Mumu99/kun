@@ -25,7 +25,11 @@
         </div>
         <el-empty v-else description="目前没有符合条件的医院" />
       </el-col>
-      <el-col :span="6"> 456</el-col>
+      <el-col :span="6" class="affix-container">
+        <el-affix target=".affix-container" :offset="80">
+          <UnitDetail />
+        </el-affix>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -38,6 +42,7 @@ import { queryPatients } from '@/services/patients'
 import Level from './components/level/index.vue'
 import Region from './components/region/index.vue'
 import DetailCard from './components/detailCard/index.vue'
+import UnitDetail from './components/unitDetail/index.vue'
 import type {
   HospitalResponseData,
   Content,

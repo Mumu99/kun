@@ -11,11 +11,27 @@
       </div>
       <Footer />
     </div>
+    <el-backtop :bottom="90">
+      <div
+        style="
+          height: 100%;
+          width: 100%;
+          background-color: var(--el-bg-color-overlay);
+          box-shadow: var(--el-box-shadow-lighter);
+          text-align: center;
+          line-height: 45px;
+          color: #1989fa;
+        "
+      >
+        <el-icon><CaretTop /></el-icon>
+      </div>
+    </el-backtop>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useElementPlusTheme } from 'use-element-plus-theme'
+import { CaretTop } from '@element-plus/icons-vue'
 useElementPlusTheme(localStorage.getItem('themeColor') || '#3c62b0') // 初始化主题色
 </script>
 

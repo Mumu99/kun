@@ -95,6 +95,38 @@ export interface HospitalByHosnameData extends ResponseData {
   data: Content
 }
 
+// 医院详情数据类型
+export interface HospitalDetail {
+  bookingRule: {
+    cycle: number
+    releaseTime: string
+    stopTime: string
+    quitDay: number
+    quitTime: string
+    rule: string[]
+  }
+  hospital: Hospital
+}
+// 医院详情返回数据类型
+export interface HospitalDetailResponseData extends ResponseData {
+  data: HospitalDetail
+}
+
+// 医院科室详情数据
+export interface DepartmentDetail {
+  depcode: string
+  depname: string
+  children: [] | null
+}
+
+// 存储全部科室数据的ts类型
+export type DepartmentContent = DepartmentDetail[]
+
+// 医院科室详情返回数据类型
+export interface DepartmentDetailResponseData extends ResponseData {
+  data: DepartmentContent
+}
+
 // # 地区/等级传递给父级参数的类型
 export interface ParentLevelAndRegion {
   value: string
