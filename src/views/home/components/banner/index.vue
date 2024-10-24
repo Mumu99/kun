@@ -51,7 +51,7 @@ const modules = [Navigation, Pagination, Autoplay]
 
 <style lang="less" scoped>
 .banner-container {
-  /deep/.banner-swiper {
+  :deep(.banner-swiper) {
     width: 100%;
     height: auto;
     .swiper-slide {

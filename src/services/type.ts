@@ -127,6 +127,51 @@ export interface DepartmentDetailResponseData extends ResponseData {
   data: DepartmentContent
 }
 
+// # 登录相关
+export interface SendResponseData extends ResponseData {
+  data: string
+}
+
+// 登录
+export interface LoginData {
+  phone: string
+  code: string
+}
+export interface UserInfo {
+  name: string
+  token: string
+}
+// 返回的数据接口
+export interface LoginResponseData extends ResponseData {
+  data: UserInfo
+}
+// 用户相关state的ts数据类型
+export interface userState {
+  visibleDialog: boolean
+  code: string
+  userInfo: UserInfo,
+  wxParams: WechartLoginData
+}
+
+// 微信扫码登录的ts类型
+export interface WechartLoginData {
+  redirectUri: string
+  appid: string
+  scope: string
+  state: string
+}
+
+// 微信扫码登录返回的数据类型
+export interface WechartLoginResponseData extends ResponseData {
+  data: WechartLoginData
+}
+// # 当前用户下拉框的ts数据类型
+export interface UserSelectData {
+  label: string
+  type: string
+  path: string
+}
+
 // # 地区/等级传递给父级参数的类型
 export interface ParentLevelAndRegion {
   value: string

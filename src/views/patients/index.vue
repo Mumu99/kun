@@ -6,10 +6,15 @@
       class="patients-tabs"
       @tab-change="handleTabChange"
     >
-      <el-tab-pane label="预约挂号" name="appointmentRegistration">
+      <el-tab-pane
+        label="预约挂号"
+        :name="isActiveStep ? 'step' : 'appointmentRegistration'"
+      >
+        <Step v-if="isActiveStep" />
         <AppointmentRegistration
           :detailData="bullentinStore.$state.bullentinDetail"
           :unitData="unitData"
+          v-else
         />
       </el-tab-pane>
       <el-tab-pane label="医院详情" name="patientsDetail">
@@ -40,7 +45,8 @@ import {
   PatientsDetail,
   AppointmentInstructions,
   QutpatientInfo,
-  QueryCancellation
+  QueryCancellation,
+  Step
 } from './components'
 import { hospitalDepartment } from '@/services/patients'
 import { useBullentinStore } from '@/store/bullentin'
@@ -52,12 +58,20 @@ const activeName = ref(route.name)
 let unitData = ref<DepartmentContent>([])
 const bullentinStore = useBullentinStore()
 let patientsKey = nanoid()
+let isActiveStep = ref(false)
 watch(
   () => route.name,
   newVal => {
     // 调用接口传递数据
-    if (activeName.value === 'appointmentRegistration') {
+    if (newVal === 'appointmentRegistration') {
+      activeName.value = newVal
+      isActiveStep.value = false
       getUnitData(route.query.hoscode as string)
+    }
+    if (newVal === 'step') {
+      // 设置当前当前为预约挂号页面
+      isActiveStep.value = true
+      activeName.value = newVal
     }
   }
 )
@@ -78,9 +92,17 @@ onMounted(() => {
   if (activeName.value === 'appointmentRegistration') {
     getUnitData(route.query.hoscode as string)
   }
+  if (activeName.value === 'step') {
+    // 设置当前当前为预约挂号页面
+    isActiveStep.value = true
+  }
 })
 const handleTabChange = (name: string) => {
-  router.push({ path: `/patients/${name}`, query: route.query })
+  console.log(name)
+  router.push({
+    path: `/patients/${name === 'step' ? 'appointmentRegistration' : name}`,
+    query: route.query
+  })
 }
 // 获取医院的科室信息
 const getUnitData = async (hoscode: string) => {

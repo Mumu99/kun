@@ -20,9 +20,12 @@ import '@/style/app.less'
 
 import Header from '@/components/header/index.vue'
 import Footer from '@/components/footer/index.vue'
+import Login from '@/components/login/index.vue'
 
 // 引入路由
 import router from '@/router'
+import 'virtual:svg-icons-register'
+import SvgIcon from '@/components/svgicon/index.vue'
 
 // 利用 createApp() 创建一个 Vue 应用实例，并挂载到 id 为 app 的元素上
 createApp(App)
@@ -34,4 +37,6 @@ createApp(App)
   .use(router)
   .component('Header', Header)
   .component('Footer', Footer)
+  .component('Login', Login)
+  .component('SvgIcon', SvgIcon)
   .mount('#app')

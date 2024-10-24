@@ -29,6 +29,14 @@ const routes = [
           )
       },
       {
+        path: 'step',
+        name: 'step',
+        component: () =>
+          import(
+            '@/views/patients/components/appointmentRegistration/step.vue'
+          )
+      },
+      {
         path: 'patientsDetail',
         name: 'patientsDetail',
         component: () =>

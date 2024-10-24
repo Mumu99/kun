@@ -1,6 +1,4 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     "target": "ES2022", // 目标语言的版
     "module": "ESNext", // 生成代码的模块标准

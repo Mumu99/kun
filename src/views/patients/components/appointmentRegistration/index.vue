@@ -84,7 +84,8 @@
                 <li
                   class="detail-item"
                   v-for="cItem in item.children"
-                  :key="item.depcode"
+                  :key="cItem.depcode"
+                  @click="showLogin(cItem.depcode)"
                 >
                   {{ cItem.depname }}
                 </li>
@@ -101,6 +102,11 @@
 <script setup lang="ts" name="AppointmentRegistration">
 import { Histogram } from '@element-plus/icons-vue'
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
+// import { useLoginStore } from '@/store/login'
+// const loginStore = useLoginStore()
 const { detailData, unitData } = defineProps(['detailData', 'unitData'])
 let activeIndex = ref(0)
 const unitClick = (index: number, depcode: string) => {
@@ -111,6 +117,18 @@ const unitClick = (index: number, depcode: string) => {
     // 计算目标元素的位置并滚动
     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
+}
+/**
+ * 科室点击
+ * 未登录：弹出登录框
+ * 登录后：预约挂号（需要路由鉴权）
+ */
+const showLogin = (depcode: string) => {
+  // if(Object.keys(loginStore.userInfo).length) {
+  //   return
+  // }
+  // loginStore.visibleDialog = true
+  router.push({ path: `/patients/step`, query: { ...route.query, depcode } })
 }
 </script>
 
@@ -254,6 +272,10 @@ const unitClick = (index: number, depcode: string) => {
                 line-height: 18px;
                 margin-top: 10px;
                 font-size: 14px;
+                cursor: pointer;
+                &:hover {
+                  color: var(--p-check-color);
+                }
               }
             }
           }

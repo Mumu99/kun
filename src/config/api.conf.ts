@@ -11,6 +11,12 @@ const apis = {
     hospitalDetail: '/hosp/hospital/',
     // 根据code获取科室列表
     hospitalDepartment: '/hosp/hospital/department/'
+  },
+  login: {
+    getSend: '/sms/send/',
+    login: '/user/login',
+    // 微信登录参数
+    getWxLoginParam: '/user/weixin/getLoginParam/',
   }
 }
 

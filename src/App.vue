@@ -26,12 +26,16 @@
         <el-icon><CaretTop /></el-icon>
       </div>
     </el-backtop>
+    <!-- 登录组件 -->
+    <Login />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useElementPlusTheme } from 'use-element-plus-theme'
 import { CaretTop } from '@element-plus/icons-vue'
+import { useLoginStore } from '@/store/login'
+const loginStore = useLoginStore()
 useElementPlusTheme(localStorage.getItem('themeColor') || '#3c62b0') // 初始化主题色
 </script>
 

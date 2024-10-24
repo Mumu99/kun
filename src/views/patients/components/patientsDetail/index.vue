@@ -45,7 +45,7 @@
 <script setup lang="ts" name="PatientsDetail">
 import { useBullentinStore } from '@/store/bullentin'
 import { Histogram, AddLocation } from '@element-plus/icons-vue'
-import AMap from '@/components/Map/index.vue'
+import AMap from '@/components/map/index.vue'
 let bullentinStore = useBullentinStore()
 </script>
 <style lang="less" scoped>

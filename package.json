@@ -22,9 +22,11 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
     "element-plus": "^2.8.5",
+    "fast-glob": "^3.3.2",
     "swiper": "^11.1.14",
     "typescript": "^5.5.3",
     "vite": "^5.4.8",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^2.1.6"
   }
 }
