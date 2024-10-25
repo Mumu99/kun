@@ -2,7 +2,9 @@ import request from '@/utils/request'
 import api from '@/config/api.conf'
 import type {
   ScheduleRuleResponseData,
-  ScheduleRuleDetailResponseData
+  ScheduleRuleDetailResponseData,
+  PatientInfoResponseData,
+  PatientDataResponseData
 } from './type'
 
 // 获取可预约的排版数据
@@ -26,3 +28,11 @@ export const getFindScheduleList = (
   request.get<any, ScheduleRuleDetailResponseData>(
     api.appointment.findScheduleList + `/${hoscode}/${depcode}/${workDate}`
   )
+
+// 获取就诊人信息
+export const findAll = () =>
+  request.get<any, PatientInfoResponseData>(api.appointment.findAll)
+
+// 获取挂号信息
+export const getSchedule = (id: string) =>
+  request.get<any, PatientDataResponseData>(api.appointment.getSchedule + id)

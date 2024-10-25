@@ -150,7 +150,7 @@ export interface userState {
   visibleDialog: boolean
   code: string
   userInfo: UserInfo
-  wxParams: WechartLoginData,
+  wxParams: WechartLoginData
   isDrakMode: boolean
 }
 
@@ -235,6 +235,79 @@ export type ScheduleRuleDetailList = ScheduleRuleDetail[]
 // 接口返回的具体排版详情数据类型
 export interface ScheduleRuleDetailResponseData extends ResponseData {
   data: ScheduleRuleDetailList
+}
+
+// 确认挂号信息 - 获取就诊人信息ts类型
+export interface PatientInfo {
+  id: number
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  param: {
+    certificatesTypeString: string
+    contactsCertificatesTypeString: string | null
+    cityString: string | null
+    fullAddress: string
+    districtString: string | null
+    provinceString: string | null
+  }
+  userId: number
+  name: string
+  certificatesType: string
+  certificatesNo: string
+  sex: number
+  birthdate: string
+  phone: string
+  isMarry: number
+  provinceCode: string | null
+  cityCode: string | null
+  districtCode: string | null
+  address: string
+  contactsName: string | null
+  contactsCertificatesType: string | null
+  contactsCertificatesNo: string | null
+  contactsPhone: string | null
+  isInsure: number
+  cardNo: string | null
+  status: string
+}
+
+export type PatientInfoArr = PatientInfo[]
+
+// 确认挂号信息 - 获取就诊人信息返回的数据类型
+export interface PatientInfoResponseData extends ResponseData {
+  data: PatientInfoArr
+}
+
+// 确认挂号信息 - 当前挂号详情
+export interface PatientData {
+  id: string
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  param: {
+    dayOfWeek: string
+    depname: string
+    hosname: string
+  }
+  hoscode: string
+  hosname: string
+  depcode: string
+  depname: string
+  title: string
+  docname: string
+  skill: string
+  workDate: string
+  workTime: number
+  reservedNumber: number
+  availableNumber: number
+  amount: number
+  status: number
+  hosScheduleId: string
+}
+// 确认挂号信息 - 当前挂号详情返回的数据类型
+export interface PatientDataResponseData extends ResponseData {
+  data: PatientData
 }
 
 // # 当前用户下拉框的ts数据类型

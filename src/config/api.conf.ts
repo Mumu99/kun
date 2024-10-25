@@ -23,7 +23,10 @@ const apis = {
     // 分页获取日期和是否有号
     getBookingScheduleRule: '/hosp/hospital/auth/getBookingScheduleRule/',
     // 获取具体的医生和号源
-    findScheduleList: '/hosp/hospital/auth/findScheduleList/'
+    findScheduleList: '/hosp/hospital/auth/findScheduleList/',
+    // # 确认挂号页面
+    findAll: '/user/patient/auth/findAll',
+    getSchedule: '/hosp/hospital/getSchedule/'
   }
 }
 
