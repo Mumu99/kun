@@ -4,6 +4,7 @@ import AppointmentInstructions from './appointmentInstructions/index.vue'
 import QutpatientInfo from './qutpatientInfo/index.vue'
 import QueryCancellation from './queryCancellation/index.vue'
 import Step from './appointmentRegistration/step.vue'
+import Booking from './appointmentRegistration/booking.vue'
 
 export {
   AppointmentRegistration,
@@ -11,5 +12,6 @@ export {
   AppointmentInstructions,
   QutpatientInfo,
   QueryCancellation,
-  Step
+  Step,
+  Booking
 }

@@ -15,7 +15,8 @@ export const useLoginStore = defineStore('login', {
       visibleDialog: <boolean>false, // 登录弹窗是否显示
       code: <string>'', // 手机验证码
       userInfo: getUserInfo() || {}, // 用户信息
-      wxParams: <WechartLoginData>{}
+      wxParams: <WechartLoginData>{},
+      isDrakMode: <boolean>false // 是否暗黑模式
     }
   },
   actions: {
@@ -54,6 +55,9 @@ export const useLoginStore = defineStore('login', {
       } else {
         return Promise.reject(new Error(message))
       }
+    },
+    setDrak(params: boolean) {
+      this.isDrakMode = params
     }
   },
   getters: {}

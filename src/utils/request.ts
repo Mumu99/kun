@@ -19,6 +19,9 @@ request.interceptors.request.use(
       text: 'Loading',
       background: 'rgba(0, 0, 0, .5)'
     })
+    config.headers.token = JSON.parse(
+      sessionStorage.getItem('kunUserInfo') || 'null'
+    )?.token
     // 请求拦截器，在请求发送之前做一些处理
     return config
   },
@@ -43,7 +46,6 @@ request.interceptors.response.use(
     }
   },
   error => {
-    console.log(error)
     errorFunc(error.response.status, error.message)
     // 响应错误处理
     return Promise.reject(error)
@@ -77,6 +79,7 @@ const errorFunc = (status = 200, message = '') => {
       message = '网关超时'
       break
   }
+  loadingInstance.close()
   ElMessage.error(message)
 }
 

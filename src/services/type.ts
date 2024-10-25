@@ -149,8 +149,9 @@ export interface LoginResponseData extends ResponseData {
 export interface userState {
   visibleDialog: boolean
   code: string
-  userInfo: UserInfo,
-  wxParams: WechartLoginData
+  userInfo: UserInfo
+  wxParams: WechartLoginData,
+  isDrakMode: boolean
 }
 
 // 微信扫码登录的ts类型
@@ -165,6 +166,77 @@ export interface WechartLoginData {
 export interface WechartLoginResponseData extends ResponseData {
   data: WechartLoginData
 }
+
+// # 预约挂号相关
+
+// 获取可预约的排版数据
+
+export interface BookingSchedule {
+  workDate: string
+  workDateMd: string
+  dayOfWeek: string
+  docCount: number
+  reservedNumber: number
+  availableNumber: number
+  status: number
+}
+
+export interface BaseMap {
+  workDateString: string
+  releaseTime: string
+  bigname: string
+  stopTime: string
+  depname: string
+  hosname: string
+}
+
+// 接口ts类型
+export interface ScheduleRule {
+  total: number
+  bookingScheduleList: BookingSchedule[]
+  baseMap: BaseMap
+}
+
+// 接口返回的预约挂号排版数据类型
+export interface ScheduleRuleResponseData extends ResponseData {
+  data: ScheduleRule
+}
+
+// 具体的排版详情
+export interface ScheduleRuleDetail {
+  id: string
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  param: {
+    dayOfWeek: string
+    depname: string
+    hosname: string
+  }
+  hoscode: string
+  hosname: string
+  depcode: string
+  depname: string
+  title: string
+  docname: string
+  skill: string
+  workDate: string
+  workTime: number
+  reservedNumber: number
+  availableNumber: number
+  amount: number
+  status: number
+  hosScheduleId: string
+}
+
+// 存储全部排版详情数据的ts类型
+export type ScheduleRuleDetailList = ScheduleRuleDetail[]
+
+// 接口返回的具体排版详情数据类型
+export interface ScheduleRuleDetailResponseData extends ResponseData {
+  data: ScheduleRuleDetailList
+}
+
 // # 当前用户下拉框的ts数据类型
 export interface UserSelectData {
   label: string

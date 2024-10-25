@@ -57,6 +57,7 @@ let detailList = ref<Content>([])
 // 总数
 let total = ref<number>(0)
 onMounted(() => {
+  console.log(12121)
   fetchData()
 })
 // 存储医院等级

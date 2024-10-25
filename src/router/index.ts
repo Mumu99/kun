@@ -29,12 +29,17 @@ const routes = [
           )
       },
       {
+        // 具体科室号源页面
         path: 'step',
         name: 'step',
         component: () =>
-          import(
-            '@/views/patients/components/appointmentRegistration/step.vue'
-          )
+          import('@/views/patients/components/appointmentRegistration/step.vue')
+      },
+      {
+        // 挂号页面
+        path: 'booking',
+        name: 'booking',
+        component: () => import('@/views/patients/components/appointmentRegistration/booking.vue')
       },
       {
         path: 'patientsDetail',

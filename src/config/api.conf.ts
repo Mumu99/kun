@@ -17,6 +17,13 @@ const apis = {
     login: '/user/login',
     // 微信登录参数
     getWxLoginParam: '/user/weixin/getLoginParam/',
+  },
+  // 预约挂号
+  appointment: {
+    // 分页获取日期和是否有号
+    getBookingScheduleRule: '/hosp/hospital/auth/getBookingScheduleRule/',
+    // 获取具体的医生和号源
+    findScheduleList: '/hosp/hospital/auth/findScheduleList/'
   }
 }
 

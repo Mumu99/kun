@@ -60,13 +60,17 @@ import { useDark, useToggle } from '@vueuse/core'
 import { Sunny, Moon, ArrowDown } from '@element-plus/icons-vue'
 import SearchPatients from '@/components/searchPatients/index.vue'
 import { useLoginStore } from '@/store/login'
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import type { UserSelectData } from '@/services/type'
 const loginStore = useLoginStore()
 const router = useRouter()
 
 const isDark = useDark() // 检测当前是否为深色模式
 const toggleDark = useToggle(isDark) // 用于切换深色和浅色模式
+
+watch(isDark, val => {
+  loginStore.setDrak(val)
+})
 const goHome = () => {
   router.push('/')
 }

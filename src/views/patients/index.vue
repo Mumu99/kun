@@ -8,9 +8,13 @@
     >
       <el-tab-pane
         label="预约挂号"
-        :name="isActiveStep ? 'step' : 'appointmentRegistration'"
+        :name="['step', 'booking'].includes(route.name as string)
+        ? route.name
+        : 'appointmentRegistration'
+        "
       >
-        <Step v-if="isActiveStep" />
+        <Step v-if="route.name === 'step'" />
+        <Booking v-else-if="route.name === 'booking'" />
         <AppointmentRegistration
           :detailData="bullentinStore.$state.bullentinDetail"
           :unitData="unitData"
@@ -46,7 +50,8 @@ import {
   AppointmentInstructions,
   QutpatientInfo,
   QueryCancellation,
-  Step
+  Step,
+  Booking
 } from './components'
 import { hospitalDepartment } from '@/services/patients'
 import { useBullentinStore } from '@/store/bullentin'
@@ -59,6 +64,7 @@ let unitData = ref<DepartmentContent>([])
 const bullentinStore = useBullentinStore()
 let patientsKey = nanoid()
 let isActiveStep = ref(false)
+const hoscode = ref(<string>route.query.hoscode)
 watch(
   () => route.name,
   newVal => {
@@ -66,9 +72,9 @@ watch(
     if (newVal === 'appointmentRegistration') {
       activeName.value = newVal
       isActiveStep.value = false
-      getUnitData(route.query.hoscode as string)
+      getUnitData(hoscode.value)
     }
-    if (newVal === 'step') {
+    if (['step', 'booking'].includes(newVal as string)) {
       // 设置当前当前为预约挂号页面
       isActiveStep.value = true
       activeName.value = newVal
@@ -78,30 +84,35 @@ watch(
 watch(
   () => route.query,
   newVal => {
-    // 调用接口获取数据
-    bullentinStore.getHospitalDetail(route.query.hoscode as string)
+    /**
+     * 根据路由查询参数中的hoscode获取医院详情。
+     * 如果hoscode存在，则调用bullentinStore的getHospitalDetail方法并传入hoscode的值。
+     */
+    route.query.hoscode && bullentinStore.getHospitalDetail(hoscode.value)
     // 调用接口传递数据
     if (activeName.value === 'appointmentRegistration') {
-      getUnitData(route.query.hoscode as string)
+      getUnitData(hoscode.value)
     }
   }
 )
 onMounted(() => {
-  // 调用接口获取数据
-  bullentinStore.getHospitalDetail(route.query.hoscode as string)
-  if (activeName.value === 'appointmentRegistration') {
-    getUnitData(route.query.hoscode as string)
-  }
-  if (activeName.value === 'step') {
+  if (['step', 'booking'].includes(activeName.value as string)) {
     // 设置当前当前为预约挂号页面
     isActiveStep.value = true
+  } else {
+    // 调用接口获取数据
+    bullentinStore.getHospitalDetail(hoscode.value)
+    if (activeName.value === 'appointmentRegistration') {
+      getUnitData(hoscode.value)
+    }
   }
 })
 const handleTabChange = (name: string) => {
-  console.log(name)
   router.push({
-    path: `/patients/${name === 'step' ? 'appointmentRegistration' : name}`,
-    query: route.query
+    path: `/patients/${
+      ['step', 'booking'].includes(name) ? 'appointmentRegistration' : name
+    }`,
+    query: { hoscode: hoscode.value }
   })
 }
 // 获取医院的科室信息
@@ -119,24 +130,29 @@ const getUnitData = async (hoscode: string) => {
 .patients-container {
   width: 1200px;
   margin: 0 auto;
+
   :deep(.patients-tabs) {
     .el-tabs__nav-wrap {
       &::after {
         width: 0;
       }
     }
+
     .el-tabs__active-bar {
       display: none;
     }
+
     .el-tabs__item {
       width: 120px;
       display: flex;
       justify-content: flex-start;
       font-family: TenCentSans-W7;
       margin: 20px 0;
+
       &.is-active {
         border-radius: 10px;
         color: var(--p-text-active-color);
+
         &::after {
           content: '';
           position: absolute;
@@ -149,10 +165,12 @@ const getUnitData = async (hoscode: string) => {
           border-radius: 2px;
         }
       }
+
       &:hover {
         color: var(--p-text-active-color);
       }
     }
+
     .el-tabs__content {
       padding-top: 33px;
       padding-left: 100px;
