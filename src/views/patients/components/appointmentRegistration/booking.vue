@@ -30,6 +30,7 @@
           class="patient-info-card patient-add-card"
           shadow="hover"
           :class="{ 'is-first': 4 % patientList.length === 0 }"
+          @click="handleAddCardClick"
         >
           + 添加就诊人
         </el-card>
@@ -131,7 +132,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { Select } from '@element-plus/icons-vue'
 import { useLoginStore } from '@/store/login'
 import { findAll, getSchedule } from '@/services/appointment'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import type {
   PatientInfo,
   PatientInfoArr,
@@ -140,6 +141,7 @@ import type {
   PatientDataResponseData
 } from '@/services/type'
 const route = useRoute()
+const router = useRouter()
 const scheduleId = route.query.scheduleId as string
 onMounted(() => {
   getDetail()
@@ -177,6 +179,10 @@ const handleCardClick = (item: PatientInfo) => {
 // const handleIdCardClick = (item: any, index: number) => {
 //   activeIdCard.value = index
 // }
+
+const handleAddCardClick = () => {
+  router.push({ path: '/userInfo' })
+}
 </script>
 
 <style lang="less" scoped>

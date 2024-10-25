@@ -1,3 +1,51 @@
 @import './reset.less';
 @import './font.css';
 @import './theme.less';
+
+// 通用样式
+.patients-tabs {
+  .el-tabs__nav-wrap {
+    &::after {
+      width: 0;
+    }
+  }
+
+  .el-tabs__active-bar {
+    display: none;
+  }
+
+  .el-tabs__item {
+    width: 120px;
+    display: flex;
+    justify-content: flex-start;
+    font-family: TenCentSans-W7;
+    margin: 20px 0;
+
+    &.is-active {
+      border-radius: 10px;
+      color: var(--p-text-active-color);
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0px;
+        width: 10px;
+        height: 10px;
+        background-color: var(--p-text-active-color);
+        transform: translate3d(0, -30%, 0);
+        border-radius: 2px;
+      }
+    }
+
+    &:hover {
+      color: var(--p-text-active-color);
+    }
+  }
+
+  .el-tabs__content {
+    padding-top: 33px;
+    padding-left: 100px;
+    margin-bottom: 50px;
+  }
+}

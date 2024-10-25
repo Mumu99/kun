@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/home/index.vue'
 import Patient from '@/views/patients/index.vue'
+import UserInfo from '@/views/userInfo/index.vue'
 import NotFound from '@/views/notFound/index.vue'
 
 const routes = [
@@ -39,7 +40,10 @@ const routes = [
         // 挂号页面
         path: 'booking',
         name: 'booking',
-        component: () => import('@/views/patients/components/appointmentRegistration/booking.vue')
+        component: () =>
+          import(
+            '@/views/patients/components/appointmentRegistration/booking.vue'
+          )
       },
       {
         path: 'patientsDetail',
@@ -66,6 +70,41 @@ const routes = [
         name: 'queryCancellation',
         component: () =>
           import('@/views/patients/components/queryCancellation/index.vue')
+      }
+    ]
+  },
+  {
+    path: '/userInfo',
+    name: 'userInfo',
+    component: UserInfo,
+    props: true, // 允许将路由参数作为组件的 props
+    children: [
+      {
+        path: 'user',
+        name: 'user',
+        component: () => import('@/views/userInfo/user/index.vue')
+      },
+      {
+        // 具体科室号源页面
+        path: 'order',
+        name: 'order',
+        component: () => import('@/views/userInfo/order/index.vue')
+      },
+      {
+        // 挂号页面
+        path: 'patientManage',
+        name: 'patientManage',
+        component: () => import('@/views/userInfo/patientManage/index.vue')
+      },
+      {
+        path: 'editUserInfo',
+        name: 'editUserInfo',
+        component: () => import('@/views/userInfo/editUserInfo/index.vue')
+      },
+      {
+        path: 'remark',
+        name: 'remark',
+        component: () => import('@/views/userInfo/remark/index.vue')
       }
     ]
   },
