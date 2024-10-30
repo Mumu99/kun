@@ -91,6 +91,12 @@ const routes = [
         component: () => import('@/views/userInfo/order/index.vue')
       },
       {
+        // 具体科室号源页面
+        path: 'order/detail',
+        name: 'detail',
+        component: () => import('@/views/userInfo/detail/index.vue')
+      },
+      {
         // 挂号页面
         path: 'patientManage',
         name: 'patientManage',

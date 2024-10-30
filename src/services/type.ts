@@ -310,6 +310,82 @@ export interface PatientDataResponseData extends ResponseData {
   data: PatientData
 }
 
+// # 挂号订单
+// 订单状态下拉框数据类型
+export interface OrderStatusSelectData {
+  comment: string
+  status: number
+}
+// 订单状态下拉框返回的数据类型
+export interface OrderStatusSelectResponseData extends ResponseData {
+  data: OrderStatusSelectData[]
+}
+// 订单列表单条数据类型
+export interface OrderListItem {
+  id: number
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  param: {
+    orderStatusString: string
+  }
+  userId: number
+  outTradeNo: string
+  hoscode: string
+  hosname: string
+  depcode: string
+  depname: string
+  scheduleId: string | null
+  title: string
+  reserveDate: string
+  reserveTime: number
+  patientId: number
+  patientName: string
+  patientPhone: string
+  hosRecordId: string
+  number: number
+  fetchTime: string
+  fetchAddress: string
+  amount: number
+  quitTime: string
+  orderStatus: number
+}
+
+// 订单列表数据类型
+export interface OrderListData {
+  records: OrderListItem[]
+  total: number
+  size: number
+  current: number
+  orders: []
+  hitCount: boolean
+  searchCount: boolean
+  pages: number
+}
+
+// 订单列表返回的数据类型
+export interface OrderListResponseData extends ResponseData {
+  data: OrderListData
+}
+
+// 订单详情返回数据类型
+export interface OrderDetailResponseData extends ResponseData {
+  data: OrderListItem
+}
+
+// 支付二维码的数据类型
+export interface PayQrcodeData {
+  codeUrl: string
+  orderId: number
+  totalFee: number
+  resultCode: string
+}
+
+// 支付二维码返回的数据类型
+export interface PayQrcodeResponseData extends ResponseData {
+  data: PayQrcodeData
+}
+
 // # 当前用户下拉框的ts数据类型
 export interface UserSelectData {
   label: string

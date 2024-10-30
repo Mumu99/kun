@@ -81,17 +81,17 @@ const dropList = reactive([
   {
     label: '实名认证',
     type: 'realName',
-    path: ''
+    path: 'user'
   },
   {
     label: '挂号订单',
     type: 'registrationOrder',
-    path: ''
+    path: 'order'
   },
   {
     label: '就诊人管理',
     type: 'patientManagement',
-    path: ''
+    path: 'patientManage'
   },
   {
     label: '退出登录',
@@ -100,11 +100,11 @@ const dropList = reactive([
   }
 ])
 const handleCommand = (val: UserSelectData) => {
-  const { label, type, path } = val
+  const { type, path } = val
   if (type === 'logout') {
     loginStore.logout()
   }
-  router.push({ path })
+  router.push({ path: `/userInfo/${path}` })
 }
 </script>
 

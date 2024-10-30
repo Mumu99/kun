@@ -6,7 +6,7 @@
 .patients-tabs {
   .el-tabs__nav-wrap {
     &::after {
-      width: 0;
+      width: 0 !important;
     }
   }
 
@@ -47,5 +47,15 @@
     padding-top: 33px;
     padding-left: 100px;
     margin-bottom: 50px;
+  }
+}
+
+// 全局通用样式
+body,
+.el-button,
+.el-scrollbar {
+  span {
+    font-family: TencentSans-W3;
+    margin-top: -3px;
   }
 }

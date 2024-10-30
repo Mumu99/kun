@@ -160,6 +160,7 @@ const rules = reactive<FormRules>({
     { required: true, message: '请输入验证码', trigger: 'blur' },
     {
       validator: (rule, value, callback) => {
+        console.log(rule)
         if (value.toString() === newCode.value) {
           callback()
         } else {

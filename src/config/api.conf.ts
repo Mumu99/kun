@@ -16,7 +16,7 @@ const apis = {
     getSend: '/sms/send/',
     login: '/user/login',
     // 微信登录参数
-    getWxLoginParam: '/user/weixin/getLoginParam/',
+    getWxLoginParam: '/user/weixin/getLoginParam/'
   },
   // 预约挂号
   appointment: {
@@ -27,6 +27,20 @@ const apis = {
     // # 确认挂号页面
     findAll: '/user/patient/auth/findAll',
     getSchedule: '/hosp/hospital/getSchedule/'
+  },
+  order: {
+    // 获取订单状态下拉框
+    getStatusList: '/order/orderInfo/auth/getStatusList',
+    // 获取订单列表
+    getOrderList: '/order/orderInfo/auth/',
+    // 获取订单列表
+    getOrderInfo: '/order/orderInfo/auth/getOrderInfo/',
+    // 取消预约
+    cancelOrder: '/order/orderInfo/auth/cancelOrder/',
+    // 生成二维码
+    createNative: '/order/weixin/createNative/',
+    // 查询支付状态
+    queryPayStatus: '/order/weixin/queryPayStatus/'
   }
 }
 

@@ -14,11 +14,13 @@ const request = axios.create({
 let loadingInstance: any = null
 request.interceptors.request.use(
   config => {
-    loadingInstance = ElLoading.service({
-      lock: true,
-      text: 'Loading',
-      background: 'rgba(0, 0, 0, .5)'
-    })
+    if (config.headers.loading !== false) {
+      loadingInstance = ElLoading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, .5)'
+      })
+    }
     config.headers.token = JSON.parse(
       sessionStorage.getItem('kunUserInfo') || 'null'
     )?.token
@@ -33,7 +35,7 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   response => {
-    loadingInstance.close()
+    loadingInstance?.close()
     // 响应拦截器，在请求成功之后做一些处理
     const { data, status } = response
     if (status === 200) {
@@ -79,7 +81,7 @@ const errorFunc = (status = 200, message = '') => {
       message = '网关超时'
       break
   }
-  loadingInstance.close()
+  loadingInstance?.close()
   ElMessage.error(message)
 }
 

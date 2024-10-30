@@ -84,6 +84,7 @@ watch(
 watch(
   () => route.query,
   newVal => {
+    console.log(newVal)
     /**
      * 根据路由查询参数中的hoscode获取医院详情。
      * 如果hoscode存在，则调用bullentinStore的getHospitalDetail方法并传入hoscode的值。
