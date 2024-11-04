@@ -259,7 +259,6 @@ const toDetail = () => {
   })
 }
 const toSetPatient = (item: any) => {
-  console.log(item)
   router.push({ path: '/patients/booking', query: { scheduleId: item.id } })
 }
 </script>

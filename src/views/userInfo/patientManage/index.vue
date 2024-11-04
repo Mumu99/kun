@@ -1,43 +1,78 @@
 <template>
   <div class="patient-manage-container">
-    <h1>就诊人管理</h1>
-    <section>
-      <el-card v-for="item in patientList" :key="item.id" class="patient-card">
-        <div class="patient-header-title">
-          <div class="left">
-            <span>{{ item.name }}</span>
-            <div class="patient-id-info">
+    <h1>{{ setTitle }}</h1>
+    <Detail v-if="isShowDetail" :type="type" :id="id" />
+    <div v-else>
+      <section>
+        <el-card
+          v-for="item in patientList"
+          :key="item.id"
+          class="patient-card"
+        >
+          <div class="patient-header-title">
+            <div class="left">
+              <span>{{ item.name }}</span>
+              <div class="patient-id-info">
+                <span>{{ item.certificatesNo }}</span>
+                <span>{{ item.param?.certificatesTypeString }}</span>
+              </div>
+            </div>
+            <div class="right" @click="patientDetail('detail', item)">
+              <span>查看详情</span>
+              <el-icon><More /></el-icon>
+            </div>
+          </div>
+          <div class="patient-id-card">
+            <div class="patient-id-card-item is-active">
+              <el-tag>自费</el-tag>
               <span>{{ item.certificatesNo }}</span>
               <span>{{ item.param?.certificatesTypeString }}</span>
             </div>
           </div>
-          <div class="right">
-            <span>查看详情</span>
-            <el-icon><More /></el-icon>
-          </div>
-        </div>
-        <div class="patient-id-card">
-          <div class="patient-id-card-item is-active">
-            <el-tag>自费</el-tag>
-            <span>{{ item.certificatesNo }}</span>
-            <span>{{ item.param?.certificatesTypeString }}</span>
-          </div>
-        </div>
+        </el-card>
+      </section>
+      <el-card class="patient-card-add" @click="patientDetail('add')">
+        <span>+ 添加就诊人</span>
       </el-card>
-    </section>
-    <el-card class="patient-card-add">
-      <span>+ 添加就诊人</span>
-    </el-card>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue'
+import { reactive, onMounted, ref, computed, watch } from 'vue'
 import { More } from '@element-plus/icons-vue'
 import { findAll } from '@/services/appointment'
-import type { PatientInfoResponseData, PatientInfoArr } from '@/services/type'
+import type {
+  PatientInfoResponseData,
+  PatientInfoArr,
+  PatientInfo
+} from '@/services/type'
+import Detail from './components/detail.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+let isShowDetail = ref(false)
+type ActionType = 'add' | 'edit' | 'detail'
+let type = ref<ActionType>('detail')
+let id = ref(0)
+watch(
+  () => route.query,
+  newVal => {
+    if (!newVal.id) {
+      isShowDetail.value = false
+      getSelectAll()
+    }
+  }
+)
 onMounted(() => {
   getSelectAll()
+})
+const setTitle = computed(() => {
+  const obj = {
+    add: '添加就诊人',
+    edit: '编辑就诊人',
+    detail: '就诊人详情'
+  }
+  return obj[type.value] || '就诊人管理'
 })
 const patientList = reactive(<PatientInfoArr>[])
 // 获取就诊人列表和订单状态列表
@@ -50,6 +85,11 @@ const getSelectAll = async () => {
   } catch (error) {
     console.log(error)
   }
+}
+const patientDetail = (nowType: string, item?: PatientInfo) => {
+  type.value = nowType
+  id.value = item?.id || 0
+  isShowDetail.value = true
 }
 </script>
 

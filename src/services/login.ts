@@ -4,7 +4,8 @@ import type {
   SendResponseData,
   LoginData,
   LoginResponseData,
-  WechartLoginResponseData
+  WechartLoginResponseData,
+  UserInfoResponseData
 } from './type'
 
 // 获取验证码
@@ -18,3 +19,6 @@ export const getWxLoginParam = (wxRedirectUri: string) =>
   request.get<any, WechartLoginResponseData>(
     api.login.getWxLoginParam + `?wxRedirectUri=${wxRedirectUri}`
   )
+// 获取当前用户信息
+export const getUserInfo = () =>
+  request.get<any, UserInfoResponseData>(api.login.getUserInfo)

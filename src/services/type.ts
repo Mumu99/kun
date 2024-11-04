@@ -386,6 +386,34 @@ export interface PayQrcodeResponseData extends ResponseData {
   data: PayQrcodeData
 }
 
+// 获取支付二维码的支付状态的数据类型
+export interface PayStatusResponseData extends ResponseData {
+  data: boolean
+}
+
+// 当前用户信息的ts数据类型
+export interface UserInfoData {
+  id: number
+  createTime: string
+  updateTime: string
+  isDeleted: number
+  param: {}
+  openid: string
+  nickName: string
+  phone: string
+  name: string
+  certificatesType: string
+  certificatesNo: string
+  certificatesUrl: string
+  authStatus: number
+  status: number
+  statusName?: string
+}
+// 当前用户信息返回的数据类型
+export interface UserInfoResponseData extends ResponseData {
+  data: UserInfoData
+}
+
 // # 当前用户下拉框的ts数据类型
 export interface UserSelectData {
   label: string
@@ -397,4 +425,22 @@ export interface UserSelectData {
 export interface ParentLevelAndRegion {
   value: string
   type: string
+}
+
+// 下拉框数据类型
+export interface SelectData {
+  id: number
+  value: string
+}
+
+// # 实名认证的ts数据类型
+export interface RealNameData {
+  label: string
+  code: string
+  isEdit: boolean
+  type: string
+  isMust?: boolean
+  optionsList?: SelectData[] | null
+  slot?: boolean | null
+  lengthLimit?: number | null
 }

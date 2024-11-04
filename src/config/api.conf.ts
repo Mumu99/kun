@@ -16,7 +16,9 @@ const apis = {
     getSend: '/sms/send/',
     login: '/user/login',
     // 微信登录参数
-    getWxLoginParam: '/user/weixin/getLoginParam/'
+    getWxLoginParam: '/user/weixin/getLoginParam/',
+    // 获取用户信息
+    getUserInfo: '/user/auth/getUserInfo'
   },
   // 预约挂号
   appointment: {
@@ -40,7 +42,15 @@ const apis = {
     // 生成二维码
     createNative: '/order/weixin/createNative/',
     // 查询支付状态
-    queryPayStatus: '/order/weixin/queryPayStatus/'
+    queryPayStatus: '/order/weixin/queryPayStatus/',
+    // 获取就诊人
+    getAuth: '/user/patient/auth/get/',
+    // 删除就诊人
+    removeAuth: '/user/patient/auth/remove/',
+    // 新增就诊人
+    addAuth: '/user/patient/auth/save',
+    // 修改就诊人
+    updateAuth: '/user/patient/auth/update',
   }
 }
 
